@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Profil</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-item lines="none">
+      <ion-avatar slot="start">
+        <img src="assets/img/42.png">
+      </ion-avatar>
+      <ion-label>
+        <h1>{{this.authService.getUsername()}}</h1>
+        <p>Registriert seit Dec 10, 2021</p>
+        <p>{{this.authService.getUsername()}}@mail.de</p>
+      </ion-label>
+      <ion-icon name="create"></ion-icon>
+    </ion-item>
+    <ion-card-content>
+      <ion-grid *ngIf="rooms && rooms.length === 0" style="height: 100%">
+        <ion-row style="height: 100%; flex-direction: column; justify-content:center; align-items:center">
+          <ion-text style="text-align: center" class="ion-padding">
+            Du hast bisher noch keinen Bingoraum erstellt.
+          </ion-text>
+          <ion-button (click)="toCreateRoom()">Jetzt Bingoraum erstellen</ion-button>
+        </ion-row>
+      </ion-grid>
+      <ion-grid *ngIf="rooms && rooms.length > 0">
+        <ion-row>
+          <ion-col>
+            <ion-list *ngIf="rooms">
+              <ion-item-divider>
+                <ion-label>
+                  <b>Deine Bingoraume</b>
+                </ion-label>
+              </ion-item-divider>
+              <ion-item-sliding class="item-remove-animate" *ngFor="let room of this.rooms; index as i">
+                <ion-item *ngIf="room" (click)="enterRoom(room)">
+                  <ion-label>{{room.raumname}} </ion-label>
+                  <ion-label slot="end">Runde:{{this.getCurrentRound(room)}}/{{this.room.runden.length}}</ion-label>
+                </ion-item>
+                <ion-item-options side="end">
+                  <ion-item-option (click)="deleteRoom(room.raumname, i)" color="danger" expandable>
+                    <ion-icon name="trash-outline"></ion-icon>
+                  </ion-item-option>
+                </ion-item-options>
+              </ion-item-sliding>
+            </ion-list>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

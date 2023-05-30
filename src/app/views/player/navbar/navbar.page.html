@@ -1,0 +1,20 @@
+<ion-tabs>
+
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button class="leaveBtn" (click)="confirmLogout()">
+      <ion-icon name="exit"></ion-icon>
+      <ion-label>Raum Verlassen</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button class="homeBtn" tab="cards{{param}}">
+      <ion-icon name="grid"></ion-icon>
+      <ion-label>Spielfeld</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button color="ion-light-tint" class="pointsBtn" tab="points{{param}}">
+      <ion-icon name="podium"></ion-icon>
+      <ion-label>Punkte</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+
+</ion-tabs>

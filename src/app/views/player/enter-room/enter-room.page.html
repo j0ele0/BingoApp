@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title size="large">
+      BingoApp
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content [fullscreen]="true">
+
+
+
+  <div class="content">
+    <div class="info1">
+      <ion-text>
+        Gib den Raumnamen ein:
+      </ion-text>
+    </div>
+
+    <div class="input">
+      <form #f="ngForm" (ngSubmit)="enterRaum(f)" novalidate>
+        <ion-item>
+          <ion-input [(ngModel)]="bingoroomcode" placeholder="Raumname" #bingoroomcodeCtrl="ngModel" name="bingoroomcode" required></ion-input>
+          <ion-button size="default" slot="end" type="submit" fill="clear">
+            <ion-icon slot="icon-only" name="arrow-forward-outline"></ion-icon>
+          </ion-button>
+        </ion-item>
+        <ion-item *ngIf="!bingoroomcodeCtrl.valid && bingoroomcodeCtrl.touched">
+          <ion-text color="danger">Bingoraumcode erforderlich</ion-text>
+        </ion-item>
+        <ion-item *ngIf="showInfo">
+          <ion-text color="danger">Bingoraum konnte nicht beigetreten werden</ion-text>
+        </ion-item>
+      </form>
+    </div>
+
+  </div>
+
+
+
+</ion-content>
+
+

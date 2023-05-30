@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title size="large">Punkte</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-refresher slot="fixed" (ionRefresh)="getPlayer($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-card class="content">
+    <ion-card-content>
+      <ion-item-divider>
+        <ion-label>
+          <b>Alle Spieler</b>
+        </ion-label>
+        <ion-label class="ion-padding-end" slot="end">
+          <b>Punkte</b>
+        </ion-label>
+      </ion-item-divider>
+      <ion-list>
+        <ion-item *ngFor="let player of this.players">
+          <ion-label>{{player.username}}</ion-label>
+          <ion-label class="ion-padding-end" slot="end">{{player.punktestand}}</ion-label>
+
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+
+  </ion-card>
+
+
+</ion-content>

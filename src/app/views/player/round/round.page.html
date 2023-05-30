@@ -1,0 +1,76 @@
+
+<ion-header>
+  <ion-toolbar>
+
+    <ion-row>
+      <ion-title size="large">
+        BingoApp - Runde #{{this.round}}
+      </ion-title>
+      <ion-button *ngIf="this.isNextRoundReady" (click)="this.goToNextRound()">
+        zur nächsten Runde
+      </ion-button>
+      <ion-button *ngIf="this.isGameOver" (click)="this.goToEndscreen()">
+        zur Punkteübersicht
+      </ion-button>
+    </ion-row>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-subtitle >Gezogene Zahlen</ion-card-subtitle>
+      </ion-card-header>
+
+      <ion-card-content class="balls">
+        <swiper [slidesPerView]="4" [spaceBetween]="25" >
+          <ng-template *ngFor="let ball of this.balls" swiperSlide>
+            <ion-img src="../../../assets/img/{{ball.kugelnummer}}.png"></ion-img>
+          </ng-template>
+        </swiper>
+      </ion-card-content>
+
+    </ion-card>
+
+    <swiper [effect]="'coverflow'" [centeredSlides]="true" [slidesPerView]="1" [spaceBetween]="-25" (activeIndexChange)="swipeIndex = $event[0].activeIndex"
+              [coverflowEffect]="{rotate: 50,stretch: -25,depth: 50,modifier: 1,slideShadows: false}">
+
+
+      <ng-template *ngFor="let card of this.cards; index as cardNr" swiperSlide>
+            <ion-card>
+
+              <ion-card-header>
+                <ion-card-title>Zettel #{{cardNr+1}}</ion-card-title>
+              </ion-card-header>
+              <ion-card-content class="cards">
+                <ion-grid class="ion-no-padding">
+                  <ion-row *ngFor="let rowIndex of [0,1,2,3,4]; index as i">
+                    <ion-col *ngFor="let field of this.getRow(cards[cardNr], rowIndex); index as j" (click)="this.markField(cardNr, field.feldnummer)" style="text-align: center">
+                      <ion-item *ngIf="!cards[cardNr].felder[field.feldnummer].markiert" [attr.id]="cardNr+'_'+field.feldnummer" class="bingoField" lines="none" fill="outline">
+                        <ion-text class="bingoNumber">{{field.zahl}}</ion-text>
+                      </ion-item>
+                      <ion-item *ngIf="cards[cardNr].felder[field.feldnummer].markiert" style="--background:rgb(4, 71, 143)" [attr.id]="cardNr+'_'+field.feldnummer" class="bingoField" lines="none" fill="outline">
+                        <ion-text class="bingoNumber">{{field.zahl}}</ion-text>
+                      </ion-item>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+              </ion-card-content>
+            </ion-card>
+      </ng-template>
+    </swiper>
+    <div>
+      <ion-button class="bingoBtn" size="large" fill="solid" shape="" strong="true" color="medium" (click)="confirmBingo()">Bingo!</ion-button>
+    </div>
+  </div>
+</ion-content>
+
+
+
+
+<ion-footer>
+
+</ion-footer>

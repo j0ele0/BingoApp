@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title size="large">Bingoraum erstellen</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row color="primary" justify-content-center>
+      <ion-col align-self-center>
+        <form #f="ngForm" (ngSubmit)="createRoom(f)" novalidate>
+          <div class="ion-padding">
+            <ion-item>
+              <ion-label>Rundenanzahl: </ion-label>
+              <ion-input slot="end" [(ngModel)]="roomCreate.rundenAnzahl" name="rundenanzahl" type="number" min="1" max="10" step="1"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label>Zettelanzahl: </ion-label>
+              <ion-input slot="end" [(ngModel)]="roomCreate.zettelAnzahl" name="bingoraumcode" type="number" min="1" max="3" step="1"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label slot="start">Kugeln hinzu:</ion-label>
+              <ion-segment [(ngModel)]="roomCreate.kugelnGenerieren" name="kugelnGenerieren">
+                <ion-segment-button value="true">
+                  <ion-label class="ion-padding-horizontal">generiert</ion-label>
+                </ion-segment-button>
+                <ion-segment-button value="false">
+                  <ion-label class="ion-padding-horizontal">manuell</ion-label>
+                </ion-segment-button>
+              </ion-segment>
+            </ion-item>
+          </div>
+          <div class="ion-padding">
+            <ion-button class="login" size="large" type="submit" [disabled]="f.invalid" expand="block">Raum erstellen</ion-button>
+          </div>
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

@@ -1,0 +1,93 @@
+@import '~swiper/swiper.min.css';
+@import '~@ionic/angular/css/ionic-swiper';
+@import "~swiper/modules/pagination/pagination.min.css";
+@import '../../../style/style';
+
+
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-slide {
+
+/*
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;*/
+
+}
+
+.swiper-slide img {
+  /*display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;*/
+
+}
+
+.bingoBtn {
+  //margin-left: auto;
+  //margin-right: auto;
+  margin-top: 5%;
+  //--ion-color-btn: $primary;
+  --background: #ef5365;
+
+}
+
+.bingoField {
+  text-align: center;
+}
+
+.bingoNumber {
+  text-align: center;
+}
+
+ion-content {
+  text-align: center;
+}
+
+ion-card {
+  //width:90%;
+  margin-top: 5%;
+  //margin-left: auto;
+  //margin-right: auto;
+  ion-card-content{
+
+  }
+  ion-card-header{
+    //margin-top: 1px;
+    //margin-bottom: 1px;
+    //text-align: center;
+  }
+
+}
+
+.cards{
+  /*padding: 0;
+  width:100%;
+  margin-left: auto;
+  margin-right: auto;*/
+}
+
+.balls {
+  //background-color: #6a64ff;
+  //border-radius: 15px;
+  //margin-top: 5px;
+  //margin-left: auto;
+  //margin-right: auto;
+  //width: 70%;
+}

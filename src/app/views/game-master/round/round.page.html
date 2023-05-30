@@ -1,0 +1,91 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title *ngIf="this.room && this.round">{{this.room.raumname}} #{{this.round}}</ion-title>
+    <ion-button slot="start" fill="clear" (click)="back()">
+      <ion-icon slot="icon-only" name="arrow-undo-outline"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="getBingos($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-button #nextRoundBtn size="medium" expand="block" *ngIf="this.anyCorrectBingo()" (click)="nextRound()">Zur Nächsten Runde</ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-item-divider>
+          <ion-label>
+            <b>Gezogene Kugeln</b>
+          </ion-label>
+        </ion-item-divider>
+        <div>
+          <swiper #swiper [config]="swiperConfig" *ngIf="this.balls">
+            <ng-template swiperSlide *ngFor="let ball of this.balls.reverse()" >
+              <ion-img src="assets/img/{{ball.kugelnummer}}.png" class="ion-padding-vertical"></ion-img>
+            </ng-template>
+          </swiper>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-item-divider>
+          <ion-label>
+            <b>Kugel hinzufügen</b>
+          </ion-label>
+        </ion-item-divider>
+        <ion-button #addBallGenBtn size="medium" expand="block" *ngIf="this.room && this.room.kugelnGenerieren" (click)="addBallGen()">Neue Kugel generieren</ion-button>
+        <div>
+          <swiper [config]="swiperConfig" *ngIf="this.room && !this.room.kugelnGenerieren">
+            <ng-template swiperSlide *ngFor="let ballnumber of this.addableBalls" >
+              <ion-img src="assets/img/{{ballnumber}}.png" class="ion-padding-vertical" (click)="addBallMan(ballnumber)"></ion-img>
+            </ng-template>
+          </swiper>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-list>
+          <ion-item-divider>
+            <ion-label>
+              <b>Alle Bingos</b>
+            </ion-label>
+          </ion-item-divider>
+          <ion-item *ngFor="let bingo of this.bingos" [ngClass]="bingo.korrekt ? 'correct': 'wrong'">
+            <ion-label>{{bingo.spielerDTO.username}}</ion-label>
+            <ion-label slot="end">{{this.timeDifference(bingo.timestamp)}}</ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-list>
+          <ion-item-divider>
+            <ion-label>
+              <b>Alle Spieler</b>
+            </ion-label>
+          </ion-item-divider>
+          <ion-item-sliding class="item-remove-animate" *ngFor="let player of this.players; index as i">
+            <ion-item>
+              <ion-label>{{player.username}}</ion-label>
+              <ion-label slot="end">Punkte: {{player.punktestand}}</ion-label>
+            </ion-item>
+            <ion-item-options side="end">
+              <ion-item-option (click)="deletePlayer(player.id, i)" color="danger" expandable>
+                <ion-icon name="trash-outline"></ion-icon>
+              </ion-item-option>
+            </ion-item-options>
+          </ion-item-sliding>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

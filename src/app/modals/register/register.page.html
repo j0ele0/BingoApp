@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title size="large">Registrieren</ion-title>
+    <div slot="end" class="ion-padding-end">
+      <ion-button (click)="dismiss()">
+        Schließen
+      </ion-button>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-grid>
+    <ion-row color="primary" justify-content-center>
+      <ion-col align-self-center>
+        <form #f="ngForm" (ngSubmit)="register()" novalidate>
+          <div class="ion-padding">
+            <ion-item>
+              <ion-input [(ngModel)]="registerData.username" name="username" type="text" placeholder="Nutzername" ngModel required></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input [(ngModel)]="registerData.password" name="password" type="password" placeholder="Passwort" ngModel required></ion-input>
+            </ion-item>
+            <ion-item *ngIf="registerFail">
+              <ion-text color="danger">Registieren fehlgeschalgen</ion-text>
+            </ion-item>
+          </div>
+          <div class="ion-padding">
+            <ion-button #registerBtn class="login" size="large" type="submit" [disabled]="f.invalid" expand="block">Registrieren</ion-button>
+          </div>
+        </form>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-padding">
+      <ion-col>
+        <ion-button size="medium" expand="block" (click)="this.toLogin()">
+          zurück zum Login 💔😢
+        </ion-button>
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
+
+</ion-content>
